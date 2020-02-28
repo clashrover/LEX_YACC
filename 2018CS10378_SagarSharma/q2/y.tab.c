@@ -70,11 +70,15 @@
 void yyerror (char *s);
 extern int yylex();
 float stack[1000];
+int b = 0;
+int b1=0;
 int stkptr = 0;
 void push(float x);
 float pop();
+extern FILE *yyin;
+extern FILE *yyout;
 
-#line 78 "y.tab.c" /* yacc.c:339  */
+#line 82 "y.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -120,11 +124,11 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 13 "convert.y" /* yacc.c:355  */
+#line 17 "convert.y" /* yacc.c:355  */
 
     char* txtval;
 
-#line 128 "y.tab.c" /* yacc.c:355  */
+#line 132 "y.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -141,7 +145,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 145 "y.tab.c" /* yacc.c:358  */
+#line 149 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -381,18 +385,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  4
+#define YYFINAL  6
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   15
+#define YYLAST   18
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  9
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  8
+#define YYNRULES  10
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  13
+#define YYNSTATES  17
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
@@ -438,7 +442,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    22,    22,    23,    26,    27,    37,    47,    57
+       0,    27,    27,    28,    29,    30,    33,    34,    44,    54,
+      64
 };
 #endif
 
@@ -475,8 +480,8 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -2,    -4,     6,     9,    -4,    11,    -4,    -3,    -4,    -4,
-      -4,    -4,    -4
+       9,    13,    -4,     6,    10,    -4,    -4,    14,    12,    -4,
+      -3,    -4,    -4,    -4,    -4,    -4,    -4
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -484,8 +489,8 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     4,     0,     0,     1,     0,     2,     0,     3,     5,
-       6,     7,     8
+       0,     0,     6,     0,     0,     4,     1,     0,     0,     2,
+       0,     5,     3,     7,     8,     9,    10
 };
 
   /* YYPGOTO[NTERM-NUM].  */
@@ -497,7 +502,7 @@ static const yytype_int8 yypgoto[] =
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2,     7
+      -1,     3,    10
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -505,34 +510,36 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-       1,     1,     9,    10,    11,    12,     4,     0,     3,     1,
-       5,     0,     1,     6,     1,     8
+       2,     0,    13,    14,    15,    16,     6,     7,     4,     2,
+       1,     8,     2,     2,     9,     2,    12,     5,    11
 };
 
 static const yytype_int8 yycheck[] =
 {
-       3,     3,     5,     6,     7,     8,     0,    -1,     0,     3,
-       2,    -1,     3,     4,     3,     4
+       3,    -1,     5,     6,     7,     8,     0,     1,     0,     3,
+       1,     3,     3,     3,     4,     3,     4,     4,     4
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     3,    10,    11,     0,    11,     4,    11,     4,     5,
-       6,     7,     8
+       0,     1,     3,    10,    11,     4,     0,     1,    11,     4,
+      11,     4,     4,     5,     6,     7,     8
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,     9,    10,    10,    11,    11,    11,    11,    11
+       0,     9,    10,    10,    10,    10,    11,    11,    11,    11,
+      11
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     2,     3,     1,     3,     3,     3,     3
+       0,     2,     2,     3,     2,     3,     1,     3,     3,     3,
+       3
 };
 
 
@@ -1209,25 +1216,37 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 22 "convert.y" /* yacc.c:1646  */
-    {printf("%s %f\n", (yyvsp[-1].txtval), stack[stkptr]);}
-#line 1215 "y.tab.c" /* yacc.c:1646  */
+#line 27 "convert.y" /* yacc.c:1646  */
+    {b=1;fprintf(yyout,"%s %f", (yyvsp[-1].txtval), stack[stkptr]); free((yyvsp[-1].txtval));}
+#line 1222 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 23 "convert.y" /* yacc.c:1646  */
-    {printf("%s %f\n", (yyvsp[-1].txtval), stack[stkptr]);}
-#line 1221 "y.tab.c" /* yacc.c:1646  */
+#line 28 "convert.y" /* yacc.c:1646  */
+    {fprintf(yyout,"\n%s %f", (yyvsp[-1].txtval), stack[stkptr]); free((yyvsp[-1].txtval));}
+#line 1228 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 26 "convert.y" /* yacc.c:1646  */
-    {(yyval.txtval)=strdup((yyvsp[0].txtval));   push(atof((yyvsp[0].txtval)));  free((yyvsp[0].txtval));}
-#line 1227 "y.tab.c" /* yacc.c:1646  */
+#line 29 "convert.y" /* yacc.c:1646  */
+    {fprintf(yyout,"invalid_input");}
+#line 1234 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 27 "convert.y" /* yacc.c:1646  */
+#line 30 "convert.y" /* yacc.c:1646  */
+    {fprintf(yyout,"\ninvalid_input");}
+#line 1240 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 6:
+#line 33 "convert.y" /* yacc.c:1646  */
+    {(yyval.txtval)=strdup((yyvsp[0].txtval));   push(atof((yyvsp[0].txtval)));  free((yyvsp[0].txtval));}
+#line 1246 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 7:
+#line 34 "convert.y" /* yacc.c:1646  */
     {   int size = 2 + strlen((yyvsp[-2].txtval)) + strlen((yyvsp[-1].txtval)) + 2;
                             (yyval.txtval) = (char*)malloc(size);
                             memset((yyval.txtval),0,size);
@@ -1238,11 +1257,11 @@ yyreduce:
                             free((yyvsp[-2].txtval)); free((yyvsp[-1].txtval));
                             float x = pop(); float y=pop(); x=x+y; push(x);
                         }
-#line 1242 "y.tab.c" /* yacc.c:1646  */
+#line 1261 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 6:
-#line 37 "convert.y" /* yacc.c:1646  */
+  case 8:
+#line 44 "convert.y" /* yacc.c:1646  */
     {   int size = 2 + strlen((yyvsp[-2].txtval)) + strlen((yyvsp[-1].txtval)) + 2;
                             (yyval.txtval) = (char*)malloc(size);
                             memset((yyval.txtval),0,size);
@@ -1253,11 +1272,11 @@ yyreduce:
                             free((yyvsp[-2].txtval)); free((yyvsp[-1].txtval));
                             float x = pop(); float y=pop(); x=y-x; push(x);
                         }
-#line 1257 "y.tab.c" /* yacc.c:1646  */
+#line 1276 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 7:
-#line 47 "convert.y" /* yacc.c:1646  */
+  case 9:
+#line 54 "convert.y" /* yacc.c:1646  */
     {   int size = 2 + strlen((yyvsp[-2].txtval)) + strlen((yyvsp[-1].txtval)) + 2;
                             (yyval.txtval) = (char*)malloc(size);
                             memset((yyval.txtval),0,size);
@@ -1268,11 +1287,11 @@ yyreduce:
                             free((yyvsp[-2].txtval)); free((yyvsp[-1].txtval));
                             float x = pop(); float y=pop(); x=x*y; push(x);
                         }
-#line 1272 "y.tab.c" /* yacc.c:1646  */
+#line 1291 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 8:
-#line 57 "convert.y" /* yacc.c:1646  */
+  case 10:
+#line 64 "convert.y" /* yacc.c:1646  */
     {   int size = 2 + strlen((yyvsp[-2].txtval)) + strlen((yyvsp[-1].txtval)) + 2;
                             (yyval.txtval) = (char*)malloc(size);
                             memset((yyval.txtval),0,size);
@@ -1283,11 +1302,11 @@ yyreduce:
                             free((yyvsp[-2].txtval)); free((yyvsp[-1].txtval));
                             float x = pop(); float y=pop();  float c = y/x; push (c);
                         }
-#line 1287 "y.tab.c" /* yacc.c:1646  */
+#line 1306 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1291 "y.tab.c" /* yacc.c:1646  */
+#line 1310 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1515,7 +1534,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 69 "convert.y" /* yacc.c:1906  */
+#line 77 "convert.y" /* yacc.c:1906  */
 
 
 void push(float x){
@@ -1528,9 +1547,14 @@ float pop(){
 }
 
 void yyerror(char* s){
-    printf("%s\n", s);
+    
 }
 
-int main(void){
-    return yyparse();
+int main(int argc, char *argv[]){
+    yyin = fopen(argv[1], "r");
+    yyout = fopen(argv[2],"w");
+    int x = yyparse();
+    
+    fclose(yyout);
+    return x;
 }

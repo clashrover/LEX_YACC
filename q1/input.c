@@ -5,5 +5,4 @@ abcs/*def*/ghi
 abc//defn
 
 abc/*def
-ghi*/jkl
-mno
+ghi

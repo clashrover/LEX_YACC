@@ -1,2 +1,3 @@
-/ 1 2 0.500000
-* 1 2 2.000000
+invalid_input
+invalid_input
+invalid_input

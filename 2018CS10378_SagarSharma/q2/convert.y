@@ -5,9 +5,13 @@
 void yyerror (char *s);
 extern int yylex();
 float stack[1000];
+int b = 0;
+int b1=0;
 int stkptr = 0;
 void push(float x);
 float pop();
+extern FILE *yyin;
+extern FILE *yyout;
 %}
 
 %union {
@@ -15,12 +19,15 @@ float pop();
 }
 %start line
 %token <txtval> number
+%token error
 %type  <txtval> line exp
 
 %%
 
-line    : exp '\n'            {printf("%s %f\n", $1, stack[stkptr]);}
-        | line exp '\n'       {printf("%s %f\n", $2, stack[stkptr]);}   
+line    : exp '\n'                {b=1;fprintf(yyout,"%s %f", $1, stack[stkptr]); free($1);}
+        | line exp '\n'           {fprintf(yyout,"\n%s %f", $2, stack[stkptr]); free($2);}   
+        | error  '\n'             {fprintf(yyout,"invalid_input");} 
+        | line error '\n'         {fprintf(yyout,"\ninvalid_input");}                 
         ;
 
 exp     : number          {$$=strdup($1);   push(atof($1));  free($1);}
@@ -64,6 +71,7 @@ exp     : number          {$$=strdup($1);   push(atof($1));  free($1);}
                             free($1); free($2);
                             float x = pop(); float y=pop();  float c = y/x; push (c);
                         }
+
         ;
 
 %%
@@ -78,9 +86,14 @@ float pop(){
 }
 
 void yyerror(char* s){
-    printf("%s\n", s);
+    
 }
 
-int main(void){
-    return yyparse();
+int main(int argc, char *argv[]){
+    yyin = fopen(argv[1], "r");
+    yyout = fopen(argv[2],"w");
+    int x = yyparse();
+    
+    fclose(yyout);
+    return x;
 }

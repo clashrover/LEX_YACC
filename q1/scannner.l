@@ -36,7 +36,7 @@ end "*/"
 				BEGIN(INITIAL);}
 <comment><<EOF>> {
 			err=1;
-			fprintf(stderr,"Error: line %d: unterminated comment\n",start_line);
+			fprintf(stderr,"Error: line %d: unterminated comment",start_line);
 			yyterminate();
 }
 
@@ -47,7 +47,7 @@ end "*/"
 <is_multi>\n printf("\n");
 <is_multi><<EOF>> {
 			err=1;
-			fprintf(stderr,"Error: line %d: unterminated comment\n",start_line);
+			fprintf(stderr,"Error: line %d: unterminated comment",start_line);
 			yyterminate();}
 <is_multi>{end} BEGIN(INITIAL);
 

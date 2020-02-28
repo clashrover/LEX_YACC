@@ -5,5 +5,3 @@ abcs ghi
 abc//defn
 
 abc 
-jkl
-mno

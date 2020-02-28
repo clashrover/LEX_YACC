@@ -843,7 +843,7 @@ case YY_STATE_EOF(comment):
 #line 38 "scannner.l"
 {
 			err=1;
-			fprintf(stderr,"Error: line %d: unterminated comment\n",start_line);
+			fprintf(stderr,"Error: line %d: unterminated comment",start_line);
 			yyterminate();
 }
 	YY_BREAK
@@ -867,7 +867,7 @@ case YY_STATE_EOF(is_multi):
 #line 49 "scannner.l"
 {
 			err=1;
-			fprintf(stderr,"Error: line %d: unterminated comment\n",start_line);
+			fprintf(stderr,"Error: line %d: unterminated comment",start_line);
 			yyterminate();}
 	YY_BREAK
 case 12:

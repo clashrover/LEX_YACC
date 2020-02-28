@@ -1,2 +1,8 @@
-/ 1 2 0.500000
-* 1 2 2.000000
+invalid_input
+invalid_input
+/ * 2 + 3 -5 2123 0
+invalid_input
+invalid_input
++ 2 + 3 -5 0
+invalid_input
+invalid_input
